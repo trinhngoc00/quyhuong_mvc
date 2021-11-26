@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\PagesController@getHome')->name('home');
 
+
 Route::get('/product', 'App\Http\Controllers\PagesController@getProduct')->name('product');
 
 Route::get('/product/{id}', 'App\Http\Controllers\PagesController@getProductDetail');
@@ -30,3 +31,9 @@ Route::get('/typeProduct/{id}', 'App\Http\Controllers\PagesController@getTypePro
 
 Route::get('/resgister', 'App\Http\Controllers\PagesController@getResgister')->name("resgister");
 Route::post('/resgister', 'App\Http\Controllers\PagesController@postResgister')->name("postResgister");
+
+Route::get('/admin', 'App\Http\Controllers\PagesController@getAdmin')->name('admin');
+Route::get('/adminType', 'App\Http\Controllers\PagesController@getAdminType')->name('adminType');
+Route::get('/adminUser', 'App\Http\Controllers\PagesController@getAdminUser')->name('adminUser');
+
+Route::post('/searchAd', 'App\Http\Controllers\PagesController@postSearchAd');

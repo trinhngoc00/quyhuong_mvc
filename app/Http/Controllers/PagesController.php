@@ -43,6 +43,7 @@ class PagesController extends Controller
 			if ($find > 0) {
 				session()->put('name', $user);
 				session()->flash('success', $user);
+				if ($user == 'admin') return redirect('admin');
 				return redirect('');
 			} else	{
 				session()->flash('error', 'Sai tên người dùng hoặc mật khẩu');
@@ -125,6 +126,19 @@ class PagesController extends Controller
 		return view('pages.index', compact('product', 'newestProduct', 'random1', 'random2', 'random3', 'result_2cake', 'all_type', 'type1', 'type2', 'type3'));
 	}
 
+	public function getAdmin() {
+		$product = Product::all();
+		return view('admin.admin', compact('product'));
+	}
+	public function getAdminType() {
+		$type = ProductType::all();
+		return view('admin.admin_type', compact('type'));
+	}
+	public function getAdminUser() {
+		$cus = Customer::all();
+		return view('admin.admin_user', compact('cus'));
+	}
+
 	public function getProduct()
 	{
 		$all_type = ProductType::all();
@@ -157,22 +171,13 @@ class PagesController extends Controller
 		return view('pages.search', compact('keyword', 'ketqua', 'num', 'all_type'));
 	}
 
-	// public function getShoppingcart() {
-	// 	$product = ShoppingCart::all();
-	// 	return view('pages.shopping-cart');
-	// }
+	public function postSearchAd(Request $request)
+	{
+		$keyword = $request->keyword;
+		$ketqua = Product::where('name', 'like', "%$keyword%")->orWhere('price', $keyword)->get();
+		return view('admin.search_admin', compact('keyword', 'ketqua'));
+	}
 
-	// public function getVegetable() {
-	// 	$product = Vegetable::where('id','>','0')->paginate(4);
-	// 	return view('pages.vegetable', ['product' => $product]);
-	// }
-
-	// public function getMeat() {
-	// 	$all = Product::where('type',"meat")->get();
-	// 	$product = Product::where('type',"meat")->paginate(4);
-	// 	// dd(count($product));
-	// 	return view('pages.meat', ['product' => $product], ['all' => $all]);
-	// }
 
 	public function getTypeProduct($type)
 	{
@@ -188,21 +193,4 @@ class PagesController extends Controller
 
 
 
-	// public function getHandbook(){
-	// 	$handbook = Handbook::where('id','>','0')->paginate(5);
-	// 	return view('pages.handbook',['handbook' => $handbook]);
-	// }
-	// public function postSearch(Request $request){
-	// 	$keyword = $request->keyword;
-	// 	$ketqua = Product::where('name','like',"%$keyword%")->orWhere('price', $keyword)->paginate(4);
-	// 	return view('pages.search', ['keyword' => $keyword, 'ketqua' => $ketqua]);
-	// }
-	// public function postLogin(Request $request){
-	// 	$username = $request->username;
-	// 	return view('pages.home',['username' => $username]);
-	// }
-	// public function postPrice(Request $req) {
-	// 	$sortproduct = Product::orderBy('price', 'asc')->paginate(8);
-	// 	return view('pages.list-product', compact('sortproduct'));
-	// }
 }

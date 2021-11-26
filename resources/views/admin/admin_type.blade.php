@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{App::getLocale()}}">
+
 <head>
-	<meta charset="utf-8">
-	<?php include 'layouts/head.php'; ?>
+	@include("layouts.head")
+
+	@yield("css_header")
+
+	@yield("js_header")
 </head>
 <body>
-	<?php include "layouts/header_admin.php" ?>
+
+	@include("layouts.header_admin")
 	<div class="container-fluid ad_content">
 		<div class="row">
-			<?php include "layouts/admin_menu.php" ?>
-
+			
+		@include("layouts.admin_menu")
 			<div class="col-10 ad_conntent" >
 				<h2 align="center">Loại sản phẩm</h2>
 				<h4 align="center">
@@ -56,10 +61,7 @@
 						<th>Xoá</th>
 						<th>Sửa</th>
 					</tr>
-					<?php 
-					$get_type = " select * from type";
-					$result_type = mysqli_query($conn,$get_type); 
-					foreach ($result_type as $row): ?>
+				@foreach ($type as $row)
 					<tr>
 						<td><?php echo $row['id'];?></td>
 						<td><?php echo $row['name'];?></td>
@@ -70,12 +72,17 @@
 							<a href="update.php?id=<?php echo $row['id'];?>&flag=type" type="button" class="btn btn-warning">Sửa</a>
 						</td>
 					</tr>
-					<?php endforeach; ?>
+					@endforeach
 				</table>
 			</div>
 		</div>
 	</div>
-	<?php include 'layouts/scripts.php'; ?>
+
+	@include("layouts.footer")
+
+    @include("layouts.scripts")
+
+    @yield("script")
 
 </body>
 </html>

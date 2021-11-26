@@ -13,11 +13,11 @@
 				<table class="" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
 					<tr>
 						<td><label>Tên đăng nhập:</label></td>
-						<td><input class="input_info" id="user" type="text" name="username" value="admin"></td>
+						<td><input class="input_info" id="user" type="text" name="username" value=""></td>
 					</tr>
 					<tr>
 						<td><label>Mật khẩu:</label></td>
-						<td><input class="input_info" type="password" name="password" id="pass" value="admin"></td>
+						<td><input class="input_info" type="password" name="password" id="pass" value=""></td>
 					</tr>
 					<tr>
 						<td colspan="2"><button class="input_btn" type="submit" id="btn">Đăng nhập</button></td>

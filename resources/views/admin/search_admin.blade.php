@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{App::getLocale()}}">
+
 <head>
-	<meta charset="utf-8">
-	<?php include 'layouts/head.php'; ?>
+	@include("layouts.head")
+
+	@yield("css_header")
+
+	@yield("js_header")
 </head>
-<body>
-	<?php include "layouts/header_admin.php" ?>
+
+<body class="nav-md">
+	@include("layouts.header_admin")
 	<div class="container-fluid ad_content">
 		<div class="row">
-			<?php include "layouts/admin_menu.php" ?>
-
-			<div class="col-10 ad_conntent" >
+			@include("layouts.admin_menu")
+			<div class="col-10 ad_conntent">
 				<h2 align="center">Sản phẩm</h2>
 				<h4 align="center">
 					<div class="alert alert-secondary" role="alert" style="display: inline-block;">
-						<form method="post" action="search_admin.php" class="form_search">
-							<input type="text" name="search" placeholder="Search" value="">
-							<input type="submit" name="search_product" value="Tìm kiếm">
+					<form method="post" action="{{url('searchAd')}}" class="form_search">
+						{{csrf_field()}}
+							<input type="text" name="keyword" placeholder="Search" value="">
+							<button type="submit" name="submit_search" value="Tìm"><i class="fa fa-search"></i></button>
 						</form>
 
 						<!-- Button modal -->
@@ -35,7 +40,7 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<form method="post" action="result_update_add_del.php" enctype="multipart/form-data">
+										<form method="post" action="result_update_add.php" enctype="multipart/form-data">
 											<table style="margin: auto;">
 												<tr>
 													<td><label>ID_loại:</label></td>
@@ -90,32 +95,34 @@
 						<th>Xoá</th>
 						<th>Sửa</th>
 					</tr>
-					<?php 
-					$get_pr = " select * from product";
-					$result_pr = mysqli_query($conn,$get_pr); 
-					foreach ($result_pr as $row): ?>
-						<tr>
-							<td><?php echo $row['id'];?></td>
-							<td><?php echo $row['id_type'];?></td>
-							<td><?php echo $row['name'];?></td>
-							<td><?php echo $row['amount'];?></td>
-							<td><?php echo $row['price'];?></td>
-							<td><?php echo $row['price_sale'];?></td>
-							<td><img src="img/<?php echo $row['image'];?>"><?php echo $row['image'];?></td>
-							<td><?php echo $row['description'];?></td>
-							<td>
-								<a type="button" class="btn btn-secondary" href="delete_product.php?id=<?php echo $row['id'];?>&flag=product">Xoá</a>
-							</td>
-							<td>
-								<a href="update.php?id=<?php echo $row['id'];?>&flag=product" type="button" class="btn btn-warning">Sửa</a>
-							</td>
-						</tr>
-					<?php endforeach; ?>
+					@foreach ($ketqua as $row)
+					<tr>
+						<td><?php echo $row['id']; ?></td>
+						<td><?php echo $row['id_type']; ?></td>
+						<td><?php echo $row['name']; ?></td>
+						<td><?php echo $row['amount']; ?></td>
+						<td><?php echo $row['price']; ?></td>
+						<td><?php echo $row['price_sale']; ?></td>
+						<td><img src="img/<?php echo $row['image']; ?>"><?php echo $row['image']; ?></td>
+						<td><?php echo $row['description']; ?></td>
+						<td>
+							<a type="button" class="btn btn-secondary" href="delete_product.php?id=<?php echo $row['id']; ?>">Xoá</a>
+						</td>
+						<td>
+							<a href="update_product.php?id=<?php echo $row['id']; ?>" type="button" class="btn btn-warning">Sửa</a>
+						</td>
+					</tr>
+					@endforeach
 				</table>
 			</div>
 		</div>
 	</div>
-	<?php include 'layouts/scripts.php'; ?>
+	@include("layouts.footer")
+
+	@include("layouts.scripts")
+
+	@yield("script")
 
 </body>
+
 </html>

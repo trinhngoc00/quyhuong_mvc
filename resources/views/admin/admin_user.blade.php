@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{App::getLocale()}}">
+
 <head>
-	<meta charset="utf-8">
-	<?php include 'layouts/head.php'; ?>
+	@include("layouts.head")
+
+	@yield("css_header")
+
+	@yield("js_header")
 </head>
 <body>
-	<?php include "layouts/header_admin.php" ?>
+
+	@include("layouts.header_admin")
 	<div class="container-fluid ad_content">
 		<div class="row">
-			<?php include "layouts/admin_menu.php" ?>
+		@include("layouts.admin_menu")
 
 			<div class="col-10 ad_conntent" >
 				<h2 align="center">Người dùng</h2>
@@ -21,10 +26,8 @@
 						<th>Điện thoại</th>
 						<th>Sửa</th>
 					</tr>
-					<?php 
-					$get_cus = " select * from customer";
-					$result_cus = mysqli_query($conn,$get_cus); 
-					foreach ($result_cus as $row): ?>
+				
+					@foreach ($cus as $row)
 					<tr>
 						<td><?php echo $row['id'];?></td>
 						<td><?php echo $row['username'];?></td>
@@ -33,12 +36,16 @@
 						<td><?php echo $row['phone'];?></td>
 						<td><a href="update.php?id=<?php echo $row['id'];?>&flag=user">Sửa</a></td>
 					</tr>
-					<?php endforeach; ?>
+					@endforeach
 				</table>
 			</div>
 		</div>
 	</div>
-	<?php include 'layouts/scripts.php'; ?>
+	@include("layouts.footer")
+
+    @include("layouts.scripts")
+
+    @yield("script")
 
 </body>
 </html>
