@@ -66,12 +66,12 @@
 						</li>
 					@endif
 
-					<?php if (isset($_SESSION['permission']) && $_SESSION['permission'] == 10) { ?>
+					@if(Session::has('name') && Session::get('name') == 'admin')
 						<li class="nav-item">
-							<a class="nav-link" href="admin.php">Trang quản trị</a>
+							<a class="nav-link" href="{{ url('admin') }}">Trang quản trị</a>
 						</li>
-					<?php } ?>
-
+						@endif
+					
 					<li class="nav-item nav-item-icon" id="icon-search">
 						<a class="nav-link" type="button"><i class="fa fa-search"></i></a>
 					</li>

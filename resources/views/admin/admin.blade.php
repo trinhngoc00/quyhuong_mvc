@@ -36,7 +36,7 @@
 						<form method="post" action="{{ url('searchAd') }}" class="form_search">
 							{{csrf_field()}}
 							<input type="text" name="keyword" placeholder="Search" value="">
-							<button type="submit" name="submit_search" value="Tìm"><i class="fa fa-search"></i> Tìm kiếm</button>
+							<button type="submit" name="submit_search"><i class="fa fa-search"></i> Tìm kiếm</button>
 						</form>
 
 						<!-- Button modal -->
@@ -123,10 +123,10 @@
 						<td><img src="img/{{ $row->image }}"></td>
 						<td>{{ $row->description }}</td>
 						<td>
-							<a type="button" class="btn btn-secondary" href="delete_product.php?id={{ $row->id }}&flag=product">Xoá</a>
+							<a type="button" class="btn btn-secondary" href="{{ url('deleteProduct', $row->id) }}">Xoá</a>
 						</td>
 						<td>
-							<a href="update.php?id={{ $row->id }}&flag=product" type="button" class="btn btn-warning">Sửa</a>
+							<a href="{{ url('updateProduct', $row->id) }}" type="button" class="btn btn-warning">Sửa</a>
 						</td>
 					</tr>
 					@endforeach

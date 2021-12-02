@@ -45,6 +45,7 @@ Route::get('/adminUser', 'App\Http\Controllers\AdminController@getAdminUser')->n
 
 //search by Admin
 Route::post('/searchAd', 'App\Http\Controllers\AdminController@postSearchAd');
+Route::post('/searchUser', 'App\Http\Controllers\AdminController@postSearchUser');
 
 //add product
 Route::post('/addProduct', 'App\Http\Controllers\AdminController@postAddProduct');
@@ -52,3 +53,21 @@ Route::post('/addProduct', 'App\Http\Controllers\AdminController@postAddProduct'
 //update product
 Route::get('/updateProduct/{id}', 'App\Http\Controllers\AdminController@getUpdateProduct')->name("updateProduct");
 Route::post('/updateProduct', 'App\Http\Controllers\AdminController@postUpdateProduct');
+
+//delete product
+Route::get('/deleteProduct/{id}', 'App\Http\Controllers\AdminController@getDeleteProduct')->name("deleteProduct");
+Route::post('/deleteProduct', 'App\Http\Controllers\AdminController@postDeleteProduct');
+
+//add product_type
+Route::post('/addType', 'App\Http\Controllers\AdminController@postAddType');
+
+//delete type
+Route::get('/deleteType/{id}', 'App\Http\Controllers\AdminController@getDeleteType')->name("deleteType");
+Route::post('/deleteType', 'App\Http\Controllers\AdminController@postDeleteType');
+
+//update type
+Route::get('/updateType/{id}', 'App\Http\Controllers\AdminController@getUpdateType')->name("updateType");
+Route::post('/updateType', 'App\Http\Controllers\AdminController@postUpdateType');
+
+//add user
+Route::post('/addUser', 'App\Http\Controllers\AdminController@postAddUser');

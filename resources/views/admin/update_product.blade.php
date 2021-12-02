@@ -32,6 +32,7 @@
 				@endif
 
 				<form method="post" action="{{ url('updateProduct') }}" enctype="multipart/form-data">
+				{{csrf_field()}}
 					<input hidden="true" class="input_info" type="text" name="id" value="<?php echo $row['id']; ?>">
 					<table style="margin: auto;">
 						<tr>
@@ -64,7 +65,7 @@
 						</tr>
 						<tr>
 							<td><input class="input_btn btn btn-secondary" type="reset" value="Nhập lại"></td>
-							<td><input class="input_btn btn btn-success" type="submit" value="Cập nhật sản phẩm" id="btn_update" name="update"></td>
+							<td><button class="input_btn btn btn-success" type="submit" id="btn_update" name="update">Cập nhật sản phẩm</button></td>
 						</tr>
 					</table>
 				</form>
@@ -73,7 +74,9 @@
 			</div>
 		</div>
 	</div>
-	<?php include 'layouts/scripts.php'; ?>
+	@include("layouts.scripts")
+
+	@yield("script")
 
 </body>
 

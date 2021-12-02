@@ -18,6 +18,19 @@
 			<div class="col-10 ad_conntent" >
 				<h2 align="center">Loại sản phẩm</h2>
 				<h4 align="center">
+				
+				@if(Session::has('success'))
+					<div class="alert alert-success" role="alert">
+						{{ Session::get('success') }}
+					</div>
+					@endif
+
+					@if(Session::has('fail'))
+					<div class="alert alert-danger" role="alert">
+						{{ Session::get('fail') }}
+					</div>
+					@endif
+
 					<div class="alert alert-secondary" role="alert" style="display: inline-block;">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary btn_modal" data-toggle="modal" data-target="#modal_add_type">
@@ -35,7 +48,8 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<form method="post" action="result_update_add_del.php" enctype="multipart/form-data">
+										<form method="post" action="{{ url('addType') }}" enctype="multipart/form-data">
+										{{csrf_field()}}	
 											<table style="margin: auto;">
 												<tr>
 													<td><label>Tên loại sản phẩm:</label></td>
@@ -43,7 +57,7 @@
 												</tr>
 												<tr>
 													<td><input class="input_btn btn btn-secondary" type="reset" value="Nhập lại"></td>
-													<td><input class="input_btn btn btn-success" type="submit" value="Thêm sản phẩm mới" id="btn_add" name="add_type"></td>
+													<td><button class="input_btn btn btn-success" type="submit" id="btn_add" name="add_type">Thêm loại sản phẩm mới</button></td>
 												</tr>
 											</table>
 										</form>
@@ -66,10 +80,10 @@
 						<td><?php echo $row['id'];?></td>
 						<td><?php echo $row['name'];?></td>
 						<td>
-							<a type="button" class="btn btn-secondary" href="delete_type.php?id=<?php echo $row['id'];?>&flag=type">Xoá</a>
+							<a type="button" class="btn btn-secondary" href="{{ url('deleteType', $row->id) }}">Xoá</a>
 						</td>
 						<td>
-							<a href="update.php?id=<?php echo $row['id'];?>&flag=type" type="button" class="btn btn-warning">Sửa</a>
+							<a href="{{ url('updateType', $row->id) }}" type="button" class="btn btn-warning">Sửa</a>
 						</td>
 					</tr>
 					@endforeach
@@ -77,8 +91,6 @@
 			</div>
 		</div>
 	</div>
-
-	@include("layouts.footer")
 
     @include("layouts.scripts")
 

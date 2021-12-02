@@ -11,17 +11,32 @@
 
 <body class="nav-md">
 	@include("layouts.header_admin")
+
 	<div class="container-fluid ad_content">
 		<div class="row">
 			@include("layouts.admin_menu")
+
 			<div class="col-10 ad_conntent">
 				<h2 align="center">Sản phẩm</h2>
 				<h4 align="center">
+
+					@if(Session::has('success'))
+					<div class="alert alert-success" role="alert">
+						{{ Session::get('success') }}
+					</div>
+					@endif
+
+					@if(Session::has('fail'))
+					<div class="alert alert-danger" role="alert">
+						{{ Session::get('fail') }}
+					</div>
+					@endif
+
 					<div class="alert alert-secondary" role="alert" style="display: inline-block;">
-					<form method="post" action="{{url('searchAd')}}" class="form_search">
-						{{csrf_field()}}
+						<form method="post" action="{{ url('searchAd') }}" class="form_search">
+							{{csrf_field()}}
 							<input type="text" name="keyword" placeholder="Search" value="">
-							<button type="submit" name="submit_search" value="Tìm"><i class="fa fa-search"></i></button>
+							<button type="submit" name="submit_search"><i class="fa fa-search"></i> Tìm kiếm</button>
 						</form>
 
 						<!-- Button modal -->
@@ -40,27 +55,28 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<form method="post" action="result_update_add.php" enctype="multipart/form-data">
+										<form method="post" action="{{ url('addProduct') }}" enctype="multipart/form-data">
+											{{csrf_field()}}
 											<table style="margin: auto;">
 												<tr>
 													<td><label>ID_loại:</label></td>
-													<td><input class="input_info" type="text" name="id_type" value=""></td>
+													<td><input class="input_info" type="text" name="id_type" value="1"></td>
 												</tr>
 												<tr>
 													<td><label>Tên sản phẩm:</label></td>
-													<td><input class="input_info" type="text" name="name" value=""></td>
+													<td><input class="input_info" type="text" name="name" value="111"></td>
 												</tr>
 												<tr>
 													<td><label>Số lượng:</label></td>
-													<td><input class="input_info" type="text" name="amount" id="" value=""></td>
+													<td><input class="input_info" type="text" name="amount" id="" value="1"></td>
 												</tr>
 												<tr>
 													<td><label>Đơn giá:</label></td>
-													<td><input class="input_info" type="text" name="price" id="" value=""></td>
+													<td><input class="input_info" type="text" name="price" id="" value="10000"></td>
 												</tr>
 												<tr>
 													<td><label>Giá khuyến mại:</label></td>
-													<td><input class="input_info" type="text" name="price_sale" id="" value=""></td>
+													<td><input class="input_info" type="text" name="price_sale" id="" value="8000"></td>
 												</tr>
 												<tr>
 													<td><label>Ảnh:</label></td>
@@ -68,11 +84,11 @@
 												</tr>
 												<tr>
 													<td><label>Mô tả:</label></td>
-													<td><input class="input_info" type="text" name="description" id="" value=""></td>
+													<td><input class="input_info" type="text" name="description" id="" value="111"></td>
 												</tr>
 												<tr>
 													<td><input class="input_btn btn btn-secondary" type="reset" value="Nhập lại"></td>
-													<td><input class="input_btn btn btn-success" type="submit" value="Thêm sản phẩm mới" id="btn_add" name="btn_add"></td>
+													<td><button class="input_btn btn btn-success" type="submit" id="btn_add" name="btn_add">Thêm sản phẩm mới</button></td>
 												</tr>
 											</table>
 										</form>
@@ -95,21 +111,22 @@
 						<th>Xoá</th>
 						<th>Sửa</th>
 					</tr>
-					@foreach ($ketqua as $row)
+
+					@foreach ($product as $row)
 					<tr>
-						<td><?php echo $row['id']; ?></td>
-						<td><?php echo $row['id_type']; ?></td>
-						<td><?php echo $row['name']; ?></td>
-						<td><?php echo $row['amount']; ?></td>
-						<td><?php echo $row['price']; ?></td>
-						<td><?php echo $row['price_sale']; ?></td>
-						<td><img src="img/<?php echo $row['image']; ?>"><?php echo $row['image']; ?></td>
-						<td><?php echo $row['description']; ?></td>
+						<td>{{ $row->id }}</td>
+						<td>{{ $row->id_type }}</td>
+						<td>{{ $row->name }}</td>
+						<td>{{ $row->amount }}</td>
+						<td>{{ $row->price }}</td>
+						<td>{{ $row->price_sale }}</td>
+						<td><img src="img/{{ $row->image }}"></td>
+						<td>{{ $row->description }}</td>
 						<td>
-							<a type="button" class="btn btn-secondary" href="delete_product.php?id=<?php echo $row['id']; ?>">Xoá</a>
+							<a type="button" class="btn btn-secondary" href="{{ url('deleteProduct', $row->id) }}">Xoá</a>
 						</td>
 						<td>
-							<a href="update_product.php?id=<?php echo $row['id']; ?>" type="button" class="btn btn-warning">Sửa</a>
+							<a href="{{ url('updateProduct', $row->id) }}" type="button" class="btn btn-warning">Sửa</a>
 						</td>
 					</tr>
 					@endforeach
@@ -117,7 +134,7 @@
 			</div>
 		</div>
 	</div>
-	@include("layouts.footer")
+
 
 	@include("layouts.scripts")
 
