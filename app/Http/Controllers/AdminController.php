@@ -182,5 +182,59 @@ class AdminController extends Controller
 			return redirect()->back()->with(['fail' => 'Sửa loại sản phẩm thất bại']);
 		}
 	}
+
+	public function postAddUser(Request $request)
+	{
+		try {
+			$cus = Customer::all();
+
+			$customer = new Customer();
+			$customer->username = $request->username;
+			$customer->password = $request->password;
+			$customer->name = $request->name;
+			$customer->address = $request->address;
+			$customer->phone = $request->phone;
+			$customer->created_at = Carbon::now()->format('Y-m-d');
+			$customer->updated_at = Carbon::now()->format('Y-m-d');
+			$customer->save();
+
+			return redirect()->back()->with(['cus' => $cus, 'success' => 'Thêm người dùng thành công']);
+		} catch (Exception $e) {
+			return redirect()->back()->with(['cus' => $cus, 'fail' => 'Thêm người dùng thất bại']);
+		}
+	}
+
+	public function getUpdateUser($id)
+	{
+		$row = Customer::find($id);
+		return view('admin.update_user', compact('row'));
+	}
+
+	public function postUpdateUser(Request $request)
+	{
+		try {
+			$pr = Customer::find($request->id);
+
+			if($request->username) 
+			$pr->username = $request->username;
+			
+			if($request->password) 
+			$pr->password = $request->password;
+			
+			if($request->name)	
+			$pr->name = $request->name;
+			
+			if($request->address)	
+			$pr->address = $request->address;
+			
+			if($request->phone) 
+			$pr->phone = $request->phone;
+
+			$pr->save();
+			return redirect()->route('adminUser')->with(['success' => 'Sửa thành công']);
+		} catch (Exception $e) {
+			return redirect()->back()->with(['fail' => 'Sửa thất bại']);
+		}
+	}
 }
 

@@ -1,7 +1,15 @@
 @extends("layouts.app")
 
 @section("css_header")
+<style>
+	tr td {
+		text-align: left;
+	}
 
+	td:last-child {
+		text-align: center;
+	}
+</style>
 @endsection
 
 @section("content")
@@ -13,14 +21,14 @@
 				<table class="" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
 					<tr>
 						<td><label>Tên đăng nhập:</label></td>
-						<td><input class="input_info" id="user" type="text" name="username" value=""></td>
+						<td><input class="input_info" id="user" type="text" name="username" value="" placeholder="Nhập username"></td>
 					</tr>
 					<tr>
 						<td><label>Mật khẩu:</label></td>
-						<td><input class="input_info" type="password" name="password" id="pass" value=""></td>
+						<td><input class="input_info" type="password" name="password" id="pass" value="" placeholder="Nhập password"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button class="input_btn" type="submit" id="btn">Đăng nhập</button></td>
+						<td colspan="2"><button class="input_btn  btn-success" type="submit" id="btn">Đăng nhập</button></td>
 					</tr>
 				</table>
 			</form>

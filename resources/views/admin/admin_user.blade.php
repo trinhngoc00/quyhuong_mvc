@@ -18,7 +18,7 @@
 
 			<div class="col-10 ad_conntent">
 				<h2 align="center">Người dùng</h2>
-				
+
 				@if(Session::has('success'))
 				<div class="alert alert-success" role="alert">
 					{{ Session::get('success') }}
@@ -59,36 +59,28 @@
 											{{csrf_field()}}
 											<table style="margin: auto;">
 												<tr>
-													<td><label>ID_loại:</label></td>
-													<td><input class="input_info" type="text" name="id_type" value="1"></td>
+													<td><label>Tên người dùng:</label></td>
+													<td><input class="input_info" type="text" name="username" id="user" value="" placeholder="trinhngoc00"></td>
 												</tr>
 												<tr>
-													<td><label>Tên sản phẩm:</label></td>
-													<td><input class="input_info" type="text" name="name" value="111"></td>
+													<td><label>Mật khẩu:</label></td>
+													<td><input class="input_info" type="password" name="password" id="pass" value=""></td>
 												</tr>
 												<tr>
-													<td><label>Số lượng:</label></td>
-													<td><input class="input_info" type="text" name="amount" id="" value="1"></td>
+													<td><label>Họ tên:</label></td>
+													<td><input class="input_info" type="text" name="name" id="" value="" placeholder="Trịnh Hồng Ngọc"></td>
 												</tr>
 												<tr>
-													<td><label>Đơn giá:</label></td>
-													<td><input class="input_info" type="text" name="price" id="" value="10000"></td>
+													<td><label>Địa chỉ:</label></td>
+													<td><input class="input_info" type="text" name="address" id="" value="" placeholder="162 Đường Phan Đình Phùng"></td>
 												</tr>
 												<tr>
-													<td><label>Giá khuyến mại:</label></td>
-													<td><input class="input_info" type="text" name="price_sale" id="" value="8000"></td>
-												</tr>
-												<tr>
-													<td><label>Ảnh:</label></td>
-													<td><input type="file" name="image_up" style="width: 100%;"></td>
-												</tr>
-												<tr>
-													<td><label>Mô tả:</label></td>
-													<td><input class="input_info" type="text" name="description" id="" value="111"></td>
+													<td><label>Số điện thoại:</label></td>
+													<td><input class="input_info" type="text" name="phone" id="" value="" placeholder="0123456789"></td>
 												</tr>
 												<tr>
 													<td><input class="input_btn btn btn-secondary" type="reset" value="Nhập lại"></td>
-													<td><button class="input_btn btn btn-success" type="submit" id="btn_add" name="btn_add">Thêm sản phẩm mới</button></td>
+													<td><button class="input_btn btn btn-success" type="submit" id="btn_add" name="btn_add">Thêm người dùng mới</button></td>
 												</tr>
 											</table>
 										</form>
@@ -116,14 +108,13 @@
 						<td><?php echo $row['name']; ?></td>
 						<td><?php echo $row['address']; ?></td>
 						<td><?php echo $row['phone']; ?></td>
-						<td><a href="update.php?id=<?php echo $row['id']; ?>&flag=user">Sửa</a></td>
+						<td><a href="{{ url('updateUser',$row->id) }}">Sửa</a></td>
 					</tr>
 					@endforeach
 				</table>
 			</div>
 		</div>
 	</div>
-	@include("layouts.footer")
 
 	@include("layouts.scripts")
 

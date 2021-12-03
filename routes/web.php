@@ -71,3 +71,7 @@ Route::post('/updateType', 'App\Http\Controllers\AdminController@postUpdateType'
 
 //add user
 Route::post('/addUser', 'App\Http\Controllers\AdminController@postAddUser');
+
+//update user
+Route::get('/updateUser/{id}', 'App\Http\Controllers\AdminController@getUpdateUser')->name("updateUser");
+Route::post('/updateUser', 'App\Http\Controllers\AdminController@postUpdateUser');

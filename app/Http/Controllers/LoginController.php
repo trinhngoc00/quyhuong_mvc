@@ -83,7 +83,7 @@ class LoginController extends Controller
 			'address.required' => 'Bạn phải nhập address !',
 			'address.min' => 'Bạn phải nhập address ít nhất 6 ký tự !',
 			'phone.required' => 'Bạn phải nhập phone !',
-			'phone.min' => 'Bạn phải nhập phone ít nhất 6 ký tự !',
+			'phone.min' => 'Bạn phải nhập phone ít nhất 10 ký tự !',
 		];
 		$request->validate($validate, $message);
 	}
