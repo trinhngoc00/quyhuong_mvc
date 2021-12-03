@@ -36,6 +36,8 @@ Route::get('/typeProduct/{id}', 'App\Http\Controllers\PagesController@getTypePro
 //search by User
 Route::post('/search', 'App\Http\Controllers\PagesController@postSearch');
 
+//cart
+Route::get('/cart', 'App\Http\Controllers\PagesController@getShoppingCart')->name('cart');
 
 //ADMIN
 //get Admin pages

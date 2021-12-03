@@ -78,7 +78,7 @@
 
 					<li class="nav-item nav-item-icon li-parent">
 
-						<a href="shopping_cart.php" class="nav-link"><span class="fa fa-cart-arrow-down"></span><span class="badge badge-dark"></span></a>
+						<a href="{{ url('cart') }}" class="nav-link"><span class="fa fa-cart-arrow-down"></span><span class="badge badge-dark"></span></a>
 
 						<!-- <div class="wrapper-submenu " style="width: 300px; right: 0;">
 									<div id="change-item-cart">

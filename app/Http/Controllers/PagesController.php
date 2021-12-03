@@ -75,4 +75,11 @@ class PagesController extends Controller
 		$tenloai = ProductType::where('id', $type)->first();
 		return view('pages.type_product', compact('all_type', 'sp_theoloai', 'sp_khac', 'loai', 'tenloai', 'num'));
 	}
+
+	public function getShoppingCart() {
+		$all_type = ProductType::all();
+
+		$result =  Product::inRandomOrder()->limit(3)->get();
+		return view('pages.shopping_cart', compact('all_type', 'result'));
+	}
 }
